@@ -58,6 +58,8 @@ Contributing is allowed if you're in the U of U Coding Bootcamp. Contact us on t
 
 ## Authors and Acknowledgment
 
+Home.edx.org. (06/23/24). https://home.edx.org/
+
 The Collaborative API Development Platform. Insomnia. (06/23/24). https://insomnia.rest/ 
 
 Routing. Express routing. (06/23/24). https://expressjs.com/en/guide/routing.html#express-router 
