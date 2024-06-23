@@ -43,7 +43,7 @@ const prompt = new PromptTemplate({
   // The inputVariables will allow us to inject user input directly into the template so that whatever question the user asks it will always be within the confines of the overall context set with the prompts template property.
   inputVariables: ["question"],
   // The partialVariables will allow us to inject the formatInstructions into the template so that the model will always provide a structured output.
-  partialVariables: { format_instructions: formatInstructions }
+  partialVariables: { format_instructions: formatInstructions },
 });
 
 // Prompt function that takes an input and returns a response with try and catch blocks to handle errors for the model if it fails to invoke the models input.
@@ -53,9 +53,19 @@ const promptFunc = async (input) => {
     const promptInput = await prompt.format({
       question: input,
     });
+
     // Invoke the model with the formatted prompt.
     const res = await model.invoke(promptInput);
-    return res;
+
+    // For a non-coding question, the model returns an error message, causing parse() to throw an exception.
+    // In this case, simply return the error message instead of the parsed results.
+    try {
+      // Parse the result.
+      const parsedResult = await parser.parse(res);
+      return parsedResult;
+    } catch (e) {
+      return res;
+    }
   } catch (err) {
     console.error(err);
     throw err;
