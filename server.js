@@ -29,8 +29,8 @@ const model = new OpenAI({
 
 // With a `StructuredOutputParser` we can define a schema for the output.
 const parser = StructuredOutputParser.fromNamesAndDescriptions({
-  code: "JavaScript code that answers the user's question",
-  explanation: "detailed explanation of the example code provided",
+  text: "Anime description of characters",
+  explanation: "detailed explanation of the anime character described",
 });
 // Set the parser to the model.
 const formatInstructions = parser.getFormatInstructions();
@@ -39,7 +39,7 @@ const formatInstructions = parser.getFormatInstructions();
 const prompt = new PromptTemplate({
   // This template will allow us to set the stage for the user's question and the response that the model will provide.
   template:
-    "You are a programming expert and will answer the user's coding questions as thoroughly as possible using JavaScript. If the question is unrelated to coding, do not answer.\n{question}",
+    "You are an anime expert and will answer the user's anime questions as thoroughly as possible using W3C. If the question is unrelated to anime, do not answer.\n{question}",
   // The inputVariables will allow us to inject user input directly into the template so that whatever question the user asks it will always be within the confines of the overall context set with the prompts template property.
   inputVariables: ["question"],
   // The partialVariables will allow us to inject the formatInstructions into the template so that the model will always provide a structured output.
